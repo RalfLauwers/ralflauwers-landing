@@ -1,0 +1,246 @@
+---
+const roles = [
+  {
+    title: 'Project Implementation Manager & Team Lead ITS Moving',
+    company: 'Gosselin Group',
+    period: 'Sep 2025 \u2013 Present',
+    location: 'Antwerp, Belgium',
+    highlights: [
+      'Led IT project and program delivery for the Moving division, aligning infrastructure and ERP initiatives with business priorities.',
+      'Established and operationalized an IT PMO based on Prince2 and Agile methodologies, defining governance, delivery standards, and portfolio visibility.',
+      'Managed ERP vendor relationships, overseeing planning, execution, and performance.',
+      'Core member of the strategic management team, reporting to the CIO.',
+      'Built and led a multidisciplinary IT team, improving collaboration and delivery predictability.',
+    ],
+  },
+  {
+    title: 'Program Manager / Senior Project Manager IT Infrastructure',
+    company: 'CM \u2013 Christelijke Mutualiteit',
+    period: 'Nov 2023 \u2013 May 2025',
+    location: 'Brussels, Belgium',
+    budget: '\u20AC4.5M',
+    highlights: [
+      'Led a multi-stream IT infrastructure program (network, security, telephony) supporting mission-critical services across 300+ offices.',
+      'Directed a major data center network upgrade and office Wi-Fi refresh, coordinating vendors and internal teams.',
+      'Defined and maintained the Infrastructure Program Roadmap for structured investment planning.',
+      'Managed risks, dependencies, and governance, improving execution predictability.',
+    ],
+  },
+  {
+    title: 'Program / Project Manager \u2013 Cloud Center of Excellence',
+    company: 'Umicore',
+    period: 'Feb 2023 \u2013 Nov 2023',
+    location: 'Antwerp, Belgium',
+    highlights: [
+      'Led enterprise cloud programs across IT and Business Units for digital transformation.',
+      'Defined cloud governance, KPIs, and delivery standards for consistent cloud adoption.',
+      'Managed cross-functional international teams across IT, security, architecture, and business.',
+      'Oversaw SaaS and IaaS implementations, improving platform agility and security compliance.',
+    ],
+  },
+  {
+    title: 'Program Manager Finance Transformation',
+    company: 'PwC Belgium',
+    period: 'Sep 2022 \u2013 Feb 2023',
+    location: 'Brussels, Belgium',
+    highlights: [
+      'Led Finance Transformation program impacting 50+ finance professionals.',
+      'Drove digital transformation initiatives, streamlining processes and improving efficiency.',
+      'Implemented finance systems and automation tools for cost control and data-driven decisions.',
+      'Established program governance and facilitated change adoption across teams.',
+    ],
+  },
+  {
+    title: 'Program / Project Manager IT Transformation',
+    company: 'Coreso SA',
+    period: 'Jul 2021 \u2013 Jul 2022',
+    location: 'Brussels, Belgium',
+    budget: '\u20AC5.6M',
+    highlights: [
+      'Led IT Transformation Program coordinating 12 engineers for enterprise modernization.',
+      'Directed MSP client transition, ensuring seamless handover with service continuity.',
+      'Established program governance, KPIs, and reporting frameworks.',
+      'Implemented cloud and infrastructure solutions for improved efficiency and scalability.',
+    ],
+  },
+  {
+    title: 'EMEA IT Infrastructure Project Manager',
+    company: 'Johnson & Johnson',
+    period: 'Jul 2019 \u2013 Dec 2019',
+    location: 'Beerse, Belgium',
+    budget: '\u20AC9.2M',
+    highlights: [
+      'Directed replacement of Cisco network and security infrastructure across 37 sites in 13 EMEA countries.',
+      'Developed and executed transition plans with risk mitigation and vendor coordination.',
+      'Modernized network and security solutions enhancing connectivity, reliability, and security posture.',
+    ],
+  },
+  {
+    title: 'IT Manager & Business Consultant',
+    company: 'Self-Employed / Various SMEs',
+    period: 'Apr 2008 \u2013 Mar 2019',
+    location: 'Belgium',
+    highlights: [
+      'Supported the start-up and management of various SMEs in Real Estate, Construction, F&B, and Finance & Insurance.',
+    ],
+  },
+  {
+    title: 'Project Manager / IT Consultant',
+    company: 'HP (Hewlett-Packard)',
+    period: 'Aug 1999 \u2013 May 2006',
+    location: 'Belgium, Netherlands, Norway, USA',
+    highlights: [
+      'IT infrastructure Project Manager with P&L responsibility for projects from \u20AC50K to \u20AC5M.',
+      'Key player managing HP services delivery across Belgium, Norway, Netherlands, and USA.',
+      'Bid Manager for the Strategic Bid Center during contract negotiation.',
+      'Earlier: IT Consultant responsible for Microsoft Server and HP Storage solutions.',
+    ],
+  },
+];
+---
+
+<section id="experience">
+  <div class="container">
+    <h2>Experience</h2>
+    <div class="timeline">
+      {
+        roles.map((role, i) => (
+          <div class="timeline-item">
+            <div class="timeline-marker">
+              <div class="timeline-dot"></div>
+              {i < roles.length - 1 && <div class="timeline-line"></div>}
+            </div>
+            <div class="timeline-card">
+              <div class="timeline-period">{role.period}</div>
+              <h3>{role.title}</h3>
+              <div class="timeline-company">
+                {role.company}
+                {role.location && <> &middot; {role.location}</>}
+                {role.budget && <> &middot; Budget: {role.budget}</>}
+              </div>
+              <ul>
+                {role.highlights.map((h) => (
+                  <li>{h}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    left: -2rem;
+    top: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .timeline-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    border: 3px solid var(--color-bg);
+    box-shadow: 0 0 0 2px var(--color-accent);
+    flex-shrink: 0;
+    z-index: 1;
+  }
+
+  .timeline-line {
+    width: 2px;
+    background: var(--color-timeline);
+    flex: 1;
+    min-height: 100%;
+    margin-top: 4px;
+  }
+
+  .timeline-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    transition: box-shadow 0.2s;
+  }
+
+  .timeline-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  }
+
+  .timeline-period {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+  }
+
+  .timeline-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .timeline-company {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .timeline-card ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .timeline-card li {
+    position: relative;
+    padding-left: 1.2rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    line-height: 1.55;
+  }
+
+  .timeline-card li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+
+  @media (max-width: 640px) {
+    .timeline {
+      padding-left: 1.5rem;
+    }
+    .timeline-marker {
+      left: -1.5rem;
+    }
+    .timeline-dot {
+      width: 12px;
+      height: 12px;
+    }
+    .timeline-card {
+      padding: 1rem;
+    }
+  }
+</style>

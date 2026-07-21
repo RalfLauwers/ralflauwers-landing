@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Experience from '../components/Experience.astro';
+import Skills from '../components/Skills.astro';
+import Education from '../components/Education.astro';
+import Contact from '../components/Contact.astro';
+---
+
+<BaseLayout>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <span class="nav-brand">RL</span>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="main-content"><Hero /></div>
+  <About />
+  <Experience />
+  <Skills />
+  <Education />
+
+  <section id="testimonials" class="section-alt">
+    <div class="container">
+      <h2>Recommendations</h2>
+      <p class="testimonial-placeholder">
+        LinkedIn recommendations coming soon. If we've worked together and you'd like
+        to leave a recommendation, <a href="https://www.linkedin.com/in/ralflauwers" target="_blank" rel="noopener noreferrer">connect with me on LinkedIn</a>.
+      </p>
+    </div>
+  </section>
+
+  <Contact />
+
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2026 Ralf Lauwers. All rights reserved.</p>
+    </div>
+  </footer>
+</BaseLayout>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    height: 56px;
+  }
+
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .nav-brand {
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: #ffffff;
+    letter-spacing: 0.04em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #94a3b8;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: #ffffff;
+  }
+
+  .footer {
+    padding: 2rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    background: var(--color-primary);
+    color: #64748b;
+  }
+
+  .section-alt {
+    background: var(--color-surface);
+  }
+
+  .testimonial-placeholder {
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto;
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+    padding: 2rem 0;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links {
+      gap: 0.75rem;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+    }
+  }
+</style>
