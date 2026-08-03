@@ -3,13 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Ralf Lauwers — Senior IT Program, Portfolio & PMO Manager. 20+ years delivering complex IT initiatives across Logistics, Government, Pharma, Telecom & Banking." />
+    <meta name="description" content="Ralf Lauwers — Senior IT Program, Portfolio & PMO Manager & Freelance IGA/IAM Program Manager. 20+ years delivering complex IT initiatives and identity security programs across Logistics, Government, Pharma, Telecom & Banking." />
     <meta name="author" content="Ralf Lauwers" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Ralf Lauwers — Senior IT Program, Portfolio & PMO Manager & Freelance IGA/IAM Program Manager" />
+    <meta property="og:description" content="20+ years delivering complex IT initiatives and identity security programs across Logistics, Government, Pharma, Telecom & Banking." />
+    <meta property="og:image" content="https://ralflauwers.netlify.app/profile.jpg" />
+    <meta property="og:url" content="https://ralflauwers.netlify.app" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ralf Lauwers — Senior IT Program, Portfolio & PMO Manager & Freelance IGA/IAM Program Manager" />
+    <meta name="twitter:description" content="20+ years delivering complex IT initiatives and identity security programs across Logistics, Government, Pharma, Telecom & Banking." />
+    <meta name="twitter:image" content="https://ralflauwers.netlify.app/profile.jpg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>Ralf Lauwers — IT Program & Portfolio Manager</title>
+    <title>Ralf Lauwers — Senior IT Program & Portfolio Manager | Freelance IGA/IAM Program Manager</title>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Ralf Lauwers",
+        "givenName": "Ralf",
+        "familyName": "Lauwers",
+        "jobTitle": "Senior IT Program, Portfolio & PMO Manager & Freelance IGA/IAM Program Manager",
+        "description": "20+ years delivering complex IT initiatives and identity security programs across Logistics, Government, Pharma, Telecom & Banking.",
+        "url": "https://ralflauwers.netlify.app",
+        "image": "https://ralflauwers.netlify.app/profile.jpg",
+        "email": "ralf.lauwers@gmail.com",
+        "telephone": "+32497302151",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Vosselaar",
+          "addressCountry": "BE"
+        },
+        "knowsLanguage": ["Dutch", "English", "German", "French"],
+        "hasOccupation": {
+          "@type": "Occupation",
+          "name": "Senior IT Program, Portfolio & PMO Manager & Freelance IGA/IAM Program Manager",
+          "skills": "IT Program Management, Portfolio Management, PMO, Digital Transformation, Cloud Adoption, Infrastructure Modernization, ERP Implementations, Vendor Management"
+        },
+        "alumniOf": [
+          {
+            "@type": "EducationalOrganization",
+            "name": "Project Management Institute"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "The George Washington University"
+          },
+          {
+            "@type": "EducationalOrganization",
+            "name": "Thomas More University of Applied Sciences"
+          }
+        ],
+        "knowsAbout": ["IT Project Management", "Digital Transformation", "Cloud Infrastructure", "PMO Setup", "ERP", "IT Strategy", "Identity Governance & Administration (IGA)", "Identity & Access Management (IAM)", "Security Program Management"]
+      }
+    </script>
+
     <slot name="head" />
   </head>
   <body>
