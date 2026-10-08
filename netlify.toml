@@ -1,9 +1,9 @@
 # Ralf Lauwers - static personal site.
-# Pure static page: there is NO build step. Netlify publishes the repo root.
+# Pure static page: there is NO build step. Netlify publishes the `public/` folder.
 
 [build]
-  # No build step (pure static): Netlify publishes the repo root.
-  publish = "."
+  # No build step (pure static): Netlify uploads the `public/` folder as-is.
+  publish = "public"
 
 # Fonts are fixed binaries whose filenames never change, so cache them "forever".
 [[headers]]
