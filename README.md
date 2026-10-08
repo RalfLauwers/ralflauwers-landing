@@ -32,8 +32,7 @@ ralflauwers-landing/
 │        ├─ ralf-lauwers-logo-reversed.svg    footer lockup (on ink navy)
 │        ├─ ralf-lauwers-favicon.svg          favicon
 │        ├─ profile.jpg                       real headshot — hero + og:image
-│        ├─ candid-2.png                      about photography ("in the work")
-│        └─ candid-1.png                      spare candid (not currently placed)
+│        └─ steady-hand.png                   about figure ("in the work"; generated brand image)
 └─ README.md
 ```
 
