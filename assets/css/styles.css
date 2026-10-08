@@ -1,0 +1,779 @@
+/* ==========================================================================
+   Ralf Lauwers — personal site
+   Brand tokens: GL-003 Design System, Surface A (§1–§6) — "Ink & Brass".
+   Static, no build step. Mobile-first.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   0. Fonts — self-hosted static instances of the GL-003 §3 stack.
+      Source files: apps/job-hunt-tracker/fonts (SIL Open Font License 1.1,
+      licence texts alongside). No external font CDN is used.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("../fonts/SourceSerif4-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("../fonts/SourceSerif4-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("../fonts/SourceSerif4-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("../fonts/JetBrainsMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
+   1. Design tokens (GL-003 §2 colour, §3 type, §4 spacing)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Core palette */
+  --color-ink: #10233A;
+  --color-brass: #B08A4A;
+  --color-canvas: #F7F4EE;
+
+  /* Warm neutral ramp (light → dark) */
+  --color-surface: #EFE9DF;
+  --color-line: #DED5C6;
+  --color-line-strong: #B9AE9B;
+  --color-text-muted: #6B6355;
+  --color-text: #2E2A24;
+
+  /* Spacing scale — base 4px */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+
+  /* Families (GL-003 §3) */
+  --font-heading: "Source Serif 4", Georgia, serif;
+  --font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+
+  /* Layout */
+  --container: 1120px;
+  --header-h: 66px;
+  --radius: 6px;
+  --radius-lg: 10px;
+
+  --speed: 160ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  color: var(--color-ink);
+  line-height: 1.15;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+p { margin: 0 0 var(--space-md); }
+p:last-child { margin-bottom: 0; }
+
+a { color: var(--color-ink); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+img { max-width: 100%; display: block; }
+
+ul, ol { margin: 0; padding: 0; }
+
+::selection { background: rgba(176, 138, 74, 0.28); color: var(--color-ink); }
+
+/* Focus — AA-visible on both light and dark surfaces */
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.dark :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--color-canvas);
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout helpers
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+}
+
+.section { padding-block: clamp(56px, 9vw, 104px); }
+.section--tight { padding-block: clamp(40px, 6vw, 72px); }
+
+/* Keep sticky header from covering anchor targets */
+section[id], main[id] { scroll-margin-top: calc(var(--header-h) + 16px); }
+
+.dark {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+.dark h1, .dark h2, .dark h3, .dark h4 { color: var(--color-canvas); }
+
+.section-head { max-width: 62ch; margin-bottom: clamp(32px, 5vw, 48px); }
+.section-head h2 { font-size: clamp(1.75rem, 3.6vw, 2.5rem); }
+
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-muted); /* muted on light — AA (≈5.4:1); brass fails AA on canvas */
+  margin-bottom: var(--space-sm);
+}
+.dark .eyebrow { color: var(--color-brass); } /* brass is safe on ink (≈5:1) */
+
+.lede {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--color-text);
+  max-width: 62ch;
+}
+
+.mono { font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.02em; }
+
+/* Brass hairline rule (brand-book cover treatment) */
+.rule {
+  width: 96px;
+  border: 0;
+  border-top: 2px solid var(--color-brass);
+  margin: var(--space-md) 0;
+}
+
+.tagline {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* Visible-to-screen-readers only */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--space-md);
+  top: -60px;
+  z-index: 100;
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: top var(--speed) var(--ease);
+}
+.skip-link:focus { top: var(--space-md); }
+
+/* --------------------------------------------------------------------------
+   4. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 44px; /* minimum touch target */
+  padding: 11px 22px;
+  border-radius: var(--radius);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color var(--speed) var(--ease), color var(--speed) var(--ease),
+              border-color var(--speed) var(--ease), transform var(--speed) var(--ease);
+}
+.btn:active { transform: translateY(1px); }
+.btn svg { width: 18px; height: 18px; flex: 0 0 auto; }
+
+/* Primary — ink fill + off-white text (≈14.5:1). Brass is never a fill (GL-003 §1). */
+.btn--primary { background: var(--color-ink); color: var(--color-canvas); border-color: var(--color-ink); }
+.btn--primary:hover { background: #1c3450; border-color: #1c3450; }
+
+/* Ghost — for use on ink surfaces; brass outline + brass text (≈5:1) */
+.btn--ghost { background: transparent; color: var(--color-brass); border-color: var(--color-brass); }
+.btn--ghost:hover { color: var(--color-canvas); border-color: var(--color-canvas); background: rgba(247, 244, 238, 0.08); }
+
+/* Secondary — for use on light surfaces */
+.btn--secondary { background: transparent; color: var(--color-ink); border-color: var(--color-line-strong); }
+.btn--secondary:hover { background: var(--color-surface); border-color: var(--color-ink); }
+
+/* Light — for use on ink surfaces (canvas fill, ink text ≈14.5:1) */
+.btn--light { background: var(--color-canvas); color: var(--color-ink); border-color: var(--color-canvas); }
+.btn--light:hover { background: #FFFFFF; border-color: #FFFFFF; }
+
+/* --------------------------------------------------------------------------
+   5. Header / navigation
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(247, 244, 238, 0.92);
+  backdrop-filter: saturate(140%) blur(8px);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  min-height: var(--header-h);
+}
+
+.nav__brand { display: inline-flex; align-items: center; text-decoration: none; }
+.nav__brand img { height: 30px; width: auto; }
+
+.nav__end {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-left: auto;
+}
+
+.nav__links ul {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  list-style: none;
+}
+.nav__links a {
+  display: block;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--speed) var(--ease), background-color var(--speed) var(--ease);
+}
+.nav__links a:hover { color: var(--color-ink); background: var(--color-surface); }
+.nav__links a[aria-current="true"] { color: var(--color-ink); }
+
+.nav__cta { display: inline-flex; }
+.nav__cta .btn { min-height: 40px; padding: 8px 18px; }
+
+/* Toggle button — only wired up when JS is present (progressive enhancement) */
+.nav__toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  padding: 0;
+  border: 1px solid var(--color-line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+.nav__toggle svg { width: 22px; height: 22px; }
+.nav__toggle .icon-close { display: none; }
+.nav.is-open .nav__toggle .icon-menu { display: none; }
+.nav.is-open .nav__toggle .icon-close { display: block; }
+
+html.js .nav__toggle { display: inline-flex; }
+html.js .nav__links { display: none; }
+html.js .nav__links.is-open { display: block; }
+
+@media (max-width: 999px) {
+  .nav { flex-wrap: wrap; }
+  html.js .nav__links {
+    order: 3;
+    width: 100%;
+    padding-bottom: var(--space-md);
+    border-top: 1px solid var(--color-line);
+    margin-top: var(--space-sm);
+  }
+  html.js .nav__links ul { flex-direction: column; align-items: stretch; gap: 2px; padding-top: var(--space-sm); }
+  html.js .nav__links a { padding: 12px; font-size: 1rem; }
+}
+
+/* Desktop: links are always inline; the toggle disappears.
+   Breakpoint is 1000px because the nav now carries six anchors — below that
+   the six links + brand + CTA no longer fit on one line. */
+@media (min-width: 1000px) {
+  html.js .nav__links { display: block; }
+  html.js .nav__toggle { display: none; }
+}
+
+/* Very small screens: drop the header CTA (the hero CTA is right there). */
+@media (max-width: 560px) {
+  .nav__cta { display: none; }
+}
+
+/* --------------------------------------------------------------------------
+   6. Hero
+   -------------------------------------------------------------------------- */
+.hero {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  position: relative;
+  overflow: hidden;
+}
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+.hero__copy {
+  padding-block: clamp(48px, 8vw, 96px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-lg);
+}
+.hero h1 {
+  color: var(--color-canvas);
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.hero__positioning {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--color-canvas);
+  max-width: 26ch;
+  margin: 0;
+}
+.hero__tagline {
+  font-size: 1.0625rem;
+  color: var(--color-brass); /* safe on ink */
+  margin: 0;
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+.hero__photo { position: relative; min-height: 260px; }
+.hero__photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+@media (min-width: 900px) {
+  .hero__inner { grid-template-columns: 1.05fr 0.95fr; }
+  .hero__copy { padding-block: clamp(72px, 9vw, 120px); padding-right: var(--space-2xl); }
+  .hero__photo { min-height: 100%; }
+}
+
+/* Thin brass keyline between hero copy and photo on wide screens */
+@media (min-width: 900px) {
+  .hero__photo { border-left: 1px solid rgba(176, 138, 74, 0.45); }
+}
+
+/* --------------------------------------------------------------------------
+   7. About
+   -------------------------------------------------------------------------- */
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .about__grid { grid-template-columns: 1.1fr 0.9fr; gap: clamp(40px, 6vw, 72px); }
+}
+.about__figure { margin: 0; }
+.about__figure .frame {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--color-ink);
+}
+.about__figure img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.about__figure figcaption {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: var(--space-sm);
+  letter-spacing: 0.02em;
+}
+.about__body p { color: var(--color-text); max-width: 60ch; }
+.about__body .lede { margin-bottom: var(--space-lg); }
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg) var(--space-xl);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-line);
+  max-width: 60ch;
+}
+@media (min-width: 560px) { .facts { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.fact dt {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+.fact dd { margin: 0; font-weight: 500; color: var(--color-ink); font-size: 0.9375rem; }
+
+/* --------------------------------------------------------------------------
+   8. What I do — cards
+   -------------------------------------------------------------------------- */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+@media (min-width: 640px) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+.card {
+  background: var(--color-canvas);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.card__icon {
+  width: 40px; height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-ink);
+  margin-bottom: var(--space-xs);
+}
+.card__icon svg { width: 30px; height: 30px; stroke: currentColor; stroke-width: 1.75; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.card h3 { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.01em; }
+.card p { color: var(--color-text-muted); font-size: 0.9375rem; margin: 0; }
+.card__index {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  /* Muted ink, not brass: brass on canvas is only 2.91:1 (fails AA) and
+     GL-003 §1 keeps brass accent-only. Muted clears AA at ≈5.4:1. */
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Section variant with a warm surface */
+.section--surface { background: var(--color-surface); }
+
+/* --------------------------------------------------------------------------
+   9. Experience — timeline
+   -------------------------------------------------------------------------- */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--color-line);
+}
+.timeline > li {
+  position: relative;
+  padding: 0 0 var(--space-2xl) var(--space-xl);
+}
+.timeline > li:last-child { padding-bottom: 0; }
+.timeline > li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 7px;
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--color-brass);
+}
+.entry__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-sm) var(--space-md);
+  margin-bottom: var(--space-xs);
+}
+.entry__date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+}
+.entry h3 { font-size: 1.2rem; font-weight: 600; }
+.entry__org { color: var(--color-ink); font-weight: 500; }
+.entry__meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+.entry ul { list-style: none; display: flex; flex-direction: column; gap: 6px; max-width: 66ch; }
+.entry ul li {
+  position: relative;
+  padding-left: var(--space-md);
+  font-size: 0.9375rem;
+  color: var(--color-text);
+}
+.entry ul li::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0.62em;
+  width: 6px; height: 1px;
+  background: var(--color-line-strong);
+}
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+/* --------------------------------------------------------------------------
+   10. Skills & expertise — tag groups
+   -------------------------------------------------------------------------- */
+.skills {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+@media (min-width: 760px) {
+  .skills { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-xl); }
+}
+
+.skill-group h3,
+.edu-subtitle {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin: 0 0 var(--space-md);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  list-style: none;
+}
+.tag {
+  display: inline-block;
+  padding: 5px 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--color-text);
+}
+.section--surface .tag { background: var(--color-canvas); }
+.tag--accent {
+  color: var(--color-ink);
+  background: rgba(176, 138, 74, 0.1);
+  border-color: var(--color-brass);
+}
+
+.passions {
+  margin-top: var(--space-2xl);
+  padding-top: var(--space-xl);
+  border-top: 1px solid var(--color-line);
+}
+.passions .eyebrow { margin-bottom: var(--space-md); }
+
+/* --------------------------------------------------------------------------
+   11. Education & certifications
+   -------------------------------------------------------------------------- */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+}
+@media (min-width: 900px) {
+  .edu-grid { grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 72px); align-items: start; }
+}
+.edu-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+.edu-item { border-left: 2px solid var(--color-brass); padding-left: var(--space-md); }
+.edu-degree { font-weight: 600; color: var(--color-ink); }
+.edu-school {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   12. Contact
+   -------------------------------------------------------------------------- */
+.contact__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+}
+@media (min-width: 900px) { .contact__inner { grid-template-columns: 1.1fr 0.9fr; gap: clamp(40px, 6vw, 72px); } }
+
+.contact h2 { font-size: clamp(1.6rem, 3.2vw, 2.25rem); max-width: 24ch; }
+.contact__aside { margin-top: var(--space-lg); }
+
+.contact-card {
+  background: rgba(247, 244, 238, 0.05);
+  border: 1px solid rgba(222, 213, 198, 0.28);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+}
+.contact-card .contact-row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: flex-start;
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid rgba(222, 213, 198, 0.18);
+}
+.contact-card .contact-row:last-of-type { border-bottom: 0; }
+.contact-card .contact-row svg {
+  width: 22px; height: 22px;
+  stroke: var(--color-brass); stroke-width: 1.75; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
+  flex: 0 0 auto; margin-top: 2px;
+}
+.contact-card .contact-row .label {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  /* Off-white, not brass: brass over the card's rgba(247,244,238,.05)
+     surface is ≈4.37:1 (fails AA). Canvas clears it at ≈12.7:1. */
+  color: var(--color-canvas);
+  margin-bottom: 2px;
+}
+.contact-card .contact-row .value { color: var(--color-canvas); font-weight: 500; }
+.contact-card .contact-row .value a { color: var(--color-canvas); }
+
+/* Ghost button inside the contact card: brass *text* over the card overlay is
+   only ≈4.37:1, so the label is off-white; brass remains on the border only. */
+.contact-card .btn--ghost { color: var(--color-canvas); }
+
+.contact__actions {
+  margin-top: var(--space-lg);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+.contact__aside { color: rgba(247, 244, 238, 0.82); font-size: 0.9375rem; }
+.contact__aside p { max-width: 46ch; }
+
+/* --------------------------------------------------------------------------
+   13. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+  border-top: 1px solid rgba(222, 213, 198, 0.18);
+  padding-block: var(--space-xl);
+}
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+.footer__brand { display: inline-flex; align-items: center; text-decoration: none; }
+.footer__brand img { height: 30px; width: auto; }
+.footer__tagline { color: var(--color-brass); }
+.footer__meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgba(247, 244, 238, 0.7);
+}
+.footer__meta a { color: rgba(247, 244, 238, 0.85); }
+
+/* --------------------------------------------------------------------------
+   14. Motion + print
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

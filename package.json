@@ -1,15 +1,11 @@
 {
   "name": "ralflauwers-landing",
-  "type": "module",
   "version": "1.0.0",
   "private": true,
+  "description": "Ralf Lauwers - freelance senior IT program & portfolio manager. Static personal site (no build step).",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
-  },
-  "dependencies": {
-    "astro": "^5.0.0"
+    "dev": "netlify dev",
+    "serve": "python -m http.server 8080"
   },
   "devDependencies": {
     "netlify-cli": "^26.2.0"

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-labelledby="rl-mark-favicon-title rl-mark-favicon-desc" preserveAspectRatio="xMidYMid meet">
+  <title id="rl-mark-favicon-title">Ralf Lauwers mark</title>
+  <desc id="rl-mark-favicon-desc">Three brass stepped bars - the Ralf Lauwers brand mark.</desc>
+  <!-- navy rounded-square tile -->
+  <rect x="0" y="0" width="32" height="32" rx="7" fill="#10233A"/>
+  <!-- stepped-bars mark -->
+  <g fill="#B08A4A">
+    <rect x="4" y="6.67" width="24" height="4" rx="1.33"/>
+    <rect x="4" y="14" width="16" height="4" rx="1.33"/>
+    <rect x="4" y="21.33" width="9.33" height="4" rx="1.33"/>
+  </g>
+</svg>

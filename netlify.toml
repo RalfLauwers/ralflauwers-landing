@@ -1,8 +1,21 @@
-[build]
-  command = "npm run build"
-  publish = "dist"
+# Ralf Lauwers - static personal site.
+# Pure static page: there is NO build step. Netlify publishes the repo root.
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+[build]
+  publish = "."
+
+# Fonts are fixed binaries whose filenames never change, so cache them "forever".
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Images keep their filenames even when the bytes change (e.g. a fresh headshot
+# or logo), so cache long but NOT immutable - 30 days stays recoverable.
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"
+
+# assets/css/*, assets/js/* and assets/cv.pdf are intentionally left uncached:
+# they change together with index.html and must not go stale.
