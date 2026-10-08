@@ -459,13 +459,6 @@ html.js .nav__links.is-open { display: block; }
   background: var(--color-ink);
 }
 .about__figure img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
-.about__figure figcaption {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-text-muted);
-  margin-top: var(--space-sm);
-  letter-spacing: 0.02em;
-}
 .about__body p { color: var(--color-text); max-width: 60ch; }
 .about__body .lede { margin-bottom: var(--space-lg); }
 
