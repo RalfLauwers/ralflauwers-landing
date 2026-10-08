@@ -2,6 +2,9 @@
 # Pure static page: there is NO build step. Netlify publishes the repo root.
 
 [build]
+  # No build step (pure static). An explicit no-op command so a stale Netlify UI
+  # build command (e.g. the old "npm run build") cannot break the deploy.
+  command = "echo static-site-no-build-step"
   publish = "."
 
 # Fonts are fixed binaries whose filenames never change, so cache them "forever".
